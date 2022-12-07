@@ -98,6 +98,24 @@ public class Voo {
         this.observacao = observacao;
     }
 
+    public static ArrayList<Voo> getVoos() {
+        return voos;
+    }
+    
+    public static Voo getVoo(int id) throws Exception {
+        for (Voo voo : voos) {
+            if (voo.getId() == id) {
+                return voo;
+            }
+        }
+
+        throw new Exception("Voo não encontrado");
+    }
+
+    public static void excluiVoo(int id) throws Exception {
+        Voo voo = getVoo(id);
+        voo.exclui(voo);
+
 
     @Override                                           
     public String toString() {

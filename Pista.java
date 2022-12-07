@@ -1,49 +1,57 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
 public class Pista {
-
-    private int id;
+  
+   
     private String numero;
-    private String pista;
+   
 
-
-    public Pista (int id, String numero){
-        this.id = id;
+    
+    public Pista(String numero) {
+  
+       
         this.numero = numero;
-        this.pista = pista;
+ 
+        try{
+            Connection conexao = DAO.createConnection();;
+            PreparedStatement stmt = conexao.prepareStatement(
+                "INSERT INTO PISTA (NUMERO) VALUES (?);"
+             );
+             stmt.setString(1, this.getNumero());
+             
+             stmt.execute();
+             DAO.closeConnection();
+        } catch(SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
-    public int getId(){
-        return this.id;
-    }
 
-    public void setId(){
-        this.id = id;
-    }
-
-    public String getNumero(){
+    public String getNumero() {
         return this.numero;
     }
+    
 
-    public void setNumero(){
+
+    public void setNumero(String local) {
         this.numero = numero;
     }
 
-    public String getPista(){
-        return this.pista;
-    }
 
-    public void setPista(){
-        this.pista = pista;
-    }
-
+    
     @Override
     public String toString() {
         return 
-        "Id = " + getId() + "\n" +
-        "Número = " + getNumero();
-        
+         
+            " Numero =" + getNumero() + "\n" ;
+         
     }
 
-
+}
 
 
 
